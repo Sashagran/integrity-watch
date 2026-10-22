@@ -1,0 +1,21 @@
+[Unit]
+Description=integrity-watch: verify file integrity baseline
+Documentation=https://github.com/Sashagran/integrity-watch
+After=local-fs.target
+
+[Service]
+Type=oneshot
+# exit code 1 = changes found, 2 = baseline tampered; both are logged, neither is a unit failure for 1
+SuccessExitStatus=1
+ExecStart=/usr/bin/python3 -m integrity_watch check \
+    --key /etc/integrity-watch/hmac.key \
+    --baseline /var/lib/integrity-watch/baseline.json \
+    --syslog --no-color
+WorkingDirectory=/opt/integrity-watch
+Nice=10
+IOSchedulingClass=idle
+ProtectSystem=strict
+ProtectHome=read-only
+PrivateTmp=true
+NoNewPrivileges=true
+ReadOnlyPaths=/
