@@ -1,0 +1,20 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "integrity-watch"
+version = "1.0.0"
+description = "File integrity monitoring for Linux with a tamper-evident HMAC-signed baseline"
+readme = "README.md"
+license = { text = "MIT" }
+authors = [{ name = "Alexander Zheltov" }]
+requires-python = ">=3.10"
+keywords = ["fim", "file-integrity", "hids", "linux-security", "astra-linux", "compliance"]
+classifiers = ["Programming Language :: Python :: 3", "Topic :: Security", "Operating System :: POSIX :: Linux"]
+
+[project.scripts]
+integrity-watch = "integrity_watch.cli:main"
+
+[tool.setuptools]
+packages = ["integrity_watch"]
